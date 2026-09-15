@@ -18,8 +18,8 @@ class TrendsError(Exception):
 
 class RetryableRequest(TrendsError):
     """A throttle from either side, a 5xx, a render that never finished, or a
-    request that never reached ScrapingBee. Raised once the attempts inside the
-    call run out, so a job wrapper knows this one is worth another go."""
+    request that returned no response to the client. Raised once the attempts
+    inside the call run out, so a job wrapper knows it is worth another go."""
 
 
 class SchemaChanged(TrendsError):
@@ -267,7 +267,7 @@ def fetch_widget(chain, items, category=0, retries=2):
     # Only the transient paths reach here: a permanent failure raised inside
     # the loop. So this is worth another attempt at the job level.
     raise RetryableRequest(f"no payload for {[i['keyword'] for i in items]} after "
-                           f"{retries + 1} attempts. {last}. Billed: {log}")
+                           f"{retries + 1} attempts. {last}. Attempts: {log}")
 
 
 def interest_over_time(keywords, geo="US", timeframe="today 12-m",
