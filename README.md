@@ -1,7 +1,4 @@
 # Google Trends scraper: runnable module and fixtures
-
-Companion code for [How to scrape Google Trends with Python using ScrapingBee](https://www.scrapingbee.com/blog/google-trends-scraper-python/).
-
 | File | What it is |
 |---|---|
 | `google_trends.py` | Every class, function and constant printed in the article, in one importable module. Generated, never hand-edited. |
