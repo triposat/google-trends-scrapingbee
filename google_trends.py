@@ -118,7 +118,7 @@ def parse_timeline(raw, keyword_count):
             raise SchemaChanged(f"unexpected point shape: {point!r}") from exc
         if len(row["values"]) != keyword_count:
             raise SchemaChanged(
-                f"expected {keyword_count} values a point, got {len(row['values'])}")
+                f"expected {keyword_count} values per point, got {len(row['values'])}")
         if not all(isinstance(v, int) and 0 <= v <= 100 for v in row["values"]):
             raise SchemaChanged(f"values outside the 0-100 scale: {row['values']}")
         series.append(row)
