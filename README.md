@@ -4,7 +4,6 @@
 | `google_trends.py` | Every class, function and constant printed in the article, in one importable module. Generated, never hand-edited. |
 | `test_fixtures.py` | Parses the committed fixtures. No network, no API key, no cost. |
 | `measure.py` | Re-measures call latency and pull-to-pull variation on your own account. **Spends credits.** |
-| `build.py` | Rebuilds `google_trends.py` from the article's code blocks. A maintainer's tool. |
 | `MEASUREMENTS.md` | Where each figure in the article came from, and what to run to get your own. |
 | `fixtures/` | Real Google responses captured 14 September 2026: one timeseries payload, one related-queries payload, and the two widget requests behind them. Public Trends data only, with no key, token or cookie in any of them. |
 
@@ -36,13 +35,3 @@ python3 -c "import google_trends as gt; print(gt.trending_now('US')[:3])"
 `trending_now()` is the cheapest place to start: one call, and no browser render.
 `interest_over_time()` and `related_queries()` each render a page, and the article
 explains what that buys.
-
-## Rebuilding the module
-
-`build.py` regenerates `google_trends.py` from the article's markdown, so the code
-here cannot drift from the code on the page. That markdown ships with the article
-rather than with this repo:
-
-```bash
-TRENDS_ARTICLE=/path/to/article.md python3 build.py --check
-```

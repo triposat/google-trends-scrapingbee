@@ -1,7 +1,7 @@
 """Google Trends via the ScrapingBee HTML API.
 
-Generated from the code blocks of the published article, so the two cannot
-drift. The article's maintainer regenerates it with build.py in this repo.
+Every class, function and constant from the article, in one module. It was
+generated from the article's own code blocks, so the two match.
 
 Article:  How to scrape Google Trends with Python using ScrapingBee
 Version:  2026-09-15
