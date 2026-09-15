@@ -181,8 +181,8 @@ def fetch_widget(chain, items, category=0, retries=2):
     last, log = "", []
     for attempt in range(retries + 1):
         try:
-            response = requests.get("https://app.scrapingbee.com/api/v1/", params={
-                "api_key": api_key(),
+            response = requests.get("https://app.scrapingbee.com/api/v1/",
+                headers={"Authorization": f"Bearer {api_key()}"}, params={
                 # Any Trends page can host the scenario. The geo that selects the
                 # data is the one inside comparisonItem, not this URL.
                 "url": "https://trends.google.com/trending?geo=US",
@@ -193,11 +193,11 @@ def fetch_widget(chain, items, category=0, retries=2):
                 "js_scenario": json.dumps(scenario),
             }, timeout=180)
         except requests.RequestException as exc:
-            # A timeout, a reset or a DNS failure never reached ScrapingBee, so
-            # there is no status to sort and nothing was billed. It has to raise
-            # the same type as a throttle, or a caller's retry never sees it.
+            # A timeout or a reset leaves no response, so there is no status to
+            # sort and no Spb-cost to read. The server may still have processed
+            # it, so record the cost as unknown and reconcile against usage.
             last = f"the request never completed: {exc}"
-            log.append({"request_id": "", "status": "transport", "cost": "0"})
+            log.append({"request_id": "", "status": "transport", "cost": "unknown"})
             if attempt < retries:
                 time.sleep(5)
             continue
@@ -238,7 +238,12 @@ def fetch_widget(chain, items, category=0, retries=2):
         if raw.startswith(")]}"):
             # The step before the payload is window.__req.
             meta = results[-2] if len(results) > 1 else ""
-            return raw, json.loads(meta or "{}")
+            try:
+                request = json.loads(meta or "{}")
+            except ValueError as exc:
+                raise SchemaChanged(f"widget metadata was unreadable, request "
+                                    f"{request_id}") from exc
+            return raw, request
         if raw.startswith("ERROR::"):
             # The chain threw inside the page, which is what a renamed widget or
             # a changed payload looks like. Keep the message: it names the step.
@@ -328,8 +333,8 @@ def as_datetime(raw):
 def trending_now(geo="US"):
     """Terms spiking now, from the RSS feed. One call, and no browser."""
     try:
-        response = requests.get("https://app.scrapingbee.com/api/v1/", params={
-            "api_key": api_key(),
+        response = requests.get("https://app.scrapingbee.com/api/v1/",
+            headers={"Authorization": f"Bearer {api_key()}"}, params={
             "url": f"https://trends.google.com/trending/rss?geo={geo}",
             "custom_google": "true",
             "render_js": "false",
