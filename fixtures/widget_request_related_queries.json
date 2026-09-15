@@ -1,0 +1,35 @@
+{
+ "restriction": {
+  "geo": {
+   "country": "US"
+  },
+  "time": "2025-09-14 2026-09-14",
+  "originalTimeRangeForExploreUrl": "today 12-m",
+  "complexKeywordsRestriction": {
+   "keyword": [
+    {
+     "type": "BROAD",
+     "value": "ai agents"
+    }
+   ]
+  }
+ },
+ "keywordType": "QUERY",
+ "metric": [
+  "TOP",
+  "RISING"
+ ],
+ "trendinessSettings": {
+  "compareTime": "2024-09-13 2025-09-13"
+ },
+ "requestOptions": {
+  "property": "",
+  "backend": "IZG",
+  "category": 0
+ },
+ "language": "en",
+ "userCountryCode": "US",
+ "userConfig": {
+  "userType": "USER_TYPE_SCRAPER"
+ }
+}

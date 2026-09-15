@@ -1,0 +1,28 @@
+{
+ "time": "2025-09-14 2026-09-14",
+ "resolution": "WEEK",
+ "locale": "en-US",
+ "comparisonItem": [
+  {
+   "geo": {
+    "country": "US"
+   },
+   "complexKeywordsRestriction": {
+    "keyword": [
+     {
+      "type": "BROAD",
+      "value": "ai agents"
+     }
+    ]
+   }
+  }
+ ],
+ "requestOptions": {
+  "property": "",
+  "backend": "IZG",
+  "category": 0
+ },
+ "userConfig": {
+  "userType": "USER_TYPE_SCRAPER"
+ }
+}
