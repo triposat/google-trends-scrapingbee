@@ -1,4 +1,4 @@
-"""Parse the committed fixtures. A Google payload reorder fails here, not in prod.
+"""Parse the committed fixtures, so a Google payload reorder fails here first.
 
     python3 test_fixtures.py
 

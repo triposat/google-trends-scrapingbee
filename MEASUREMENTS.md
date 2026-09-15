@@ -53,7 +53,7 @@ sit somewhere else entirely.
 
 ### Measured once, on our account, in August and September 2026
 
-These came from one-off runs against conditions you will not share: a different
+These came from one-off runs under conditions you cannot reproduce: a different
 address, a different day, a different cache. They are reported as observations,
 not as rates you should expect.
 
@@ -64,5 +64,5 @@ not as rates you should expect.
 - `trendspyg` from one residential address: 3 of 12 keywords succeeded, cooldown over 15 minutes
 - the five-query shape check: 53, 93, 53, 262 and 93 points across 4 countries and 3 timeframes
 
-If you reproduce any of these and get something different, that is the expected
-outcome rather than a contradiction. The article says so, and so does this file.
+If you run any of these and get something different, that is the expected
+outcome rather than a contradiction.
