@@ -5,7 +5,7 @@
 | `test_fixtures.py` | Parses the committed fixtures. No network, no API key, no cost. |
 | `measure.py` | Re-measures call latency and pull-to-pull variation on your own account. **Spends credits.** |
 | `MEASUREMENTS.md` | Where each figure in the article came from, and what to run to get your own. |
-| `fixtures/` | Real Google responses captured 14 September 2026: one timeseries payload, one related-queries payload, and the two widget requests behind them. Public Trends data only, with no key, token or cookie in any of them. |
+| `fixtures/` | Four real Google responses captured 14 September 2026: a timeseries payload, a related-queries payload for `machine learning`, and two widget requests for `ai agents`. Independent captures, so the payloads and the widget requests are not matched pairs. Public Trends data only, with no key, token or cookie in any of them. |
 
 Python 3.8 or newer. The only dependency is `requests`.
 

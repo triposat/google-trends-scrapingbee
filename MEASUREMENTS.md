@@ -50,6 +50,7 @@ sit somewhere else entirely.
 | pull-to-pull variation | `python3 measure.py noise` | two pairs a week apart: 42 of 52 both times, median 2 both times, max 5 then 8 |
 | credits a call | read `Spb-cost` on any response | 15 on Google domains |
 | your plan's ceilings | `GET /api/v1/usage` | 100,000 credits a month, 100 concurrent |
+| items the RSS feed returns | `python3 -c "import google_trends as gt; print(len(gt.trending_now('US')))"` | 10 on every request we made |
 
 ### Measured once, on our account, in August and September 2026
 
@@ -61,6 +62,8 @@ not as rates you should expect.
 - `geo` sub-region spreads on `wildfire`: up to 42, 38 and 44 points
 - `tz` across 0, -480 and 330: 6 calls, 3 distinct responses, groupings not following `tz`
 - the `/trending` page: more than 500 terms, and 517 rows shared between a 24-hour and a 168-hour capture, 76 of them reporting a larger volume in the wider window
+- the RSS feed's window: two pulls covered 20 minutes and 110 minutes, so the span moves with the news cycle even though the item count held at 10
+- RSS parameters: `geo` was the only one that changed the body; `hours`, `category` and `hl` each returned a response byte-identical to the `geo`-only call
 - `trendspyg` from one residential address: 3 of 12 keywords succeeded, cooldown over 15 minutes
 - the five-query shape check: 53, 93, 53, 262 and 93 points across 4 countries and 3 timeframes
 
