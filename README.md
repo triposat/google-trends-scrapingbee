@@ -28,7 +28,7 @@ rather than quietly writing wrong rows wherever you store results.
 
 ## Make a live call
 
-Calls to Google domains bill 15 credits each, so this step costs money.
+Calls to Google domains bill [15 credits each](https://www.scrapingbee.com/#pricing), so this step costs money.
 [Sign up](https://app.scrapingbee.com/account/register) for a key, then:
 
 ```bash

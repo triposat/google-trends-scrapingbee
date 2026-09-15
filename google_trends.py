@@ -4,7 +4,7 @@ Generated from the code blocks of the published article, so the two cannot
 drift. The article's maintainer regenerates it with build.py in this repo.
 
 Article:  How to scrape Google Trends with Python using ScrapingBee
-Version:  2026-09-14
+Version:  2026-09-15
 Requires: requests
 Set SCRAPINGBEE_API_KEY in the environment before calling anything here.
 """

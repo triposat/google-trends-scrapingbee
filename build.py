@@ -17,13 +17,19 @@ ART = os.environ.get("TRENDS_ARTICLE",
                     os.path.join(HERE, "..", "article.md"))
 OUT = os.path.join(HERE, "google_trends.py")
 
+def article_version(src):
+    """Take the version from the article's own dateModified, so it cannot drift."""
+    m = re.search(r'^dateModified:\s*"([\d-]+)"', src, re.M)
+    return m.group(1) if m else "unknown"
+
+
 HEADER = '''"""Google Trends via the ScrapingBee HTML API.
 
 Generated from the code blocks of the published article, so the two cannot
 drift. The article's maintainer regenerates it with build.py in this repo.
 
 Article:  How to scrape Google Trends with Python using ScrapingBee
-Version:  2026-09-14
+Version:  {version}
 Requires: requests
 Set SCRAPINGBEE_API_KEY in the environment before calling anything here.
 """
@@ -72,7 +78,7 @@ def build():
             continue
         seen.add(p)
         unique.append(p)
-    return HEADER + "\n" + "\n\n\n".join(unique) + "\n"
+    return HEADER.format(version=article_version(src)) + "\n" + "\n\n\n".join(unique) + "\n"
 
 
 if __name__ == "__main__":
