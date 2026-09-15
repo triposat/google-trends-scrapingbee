@@ -34,6 +34,15 @@ class DataQuality(TrendsError):
     """The response parsed, but it can't answer what was asked."""
 
 
+def api_key():
+    """The key, or the fix. An unset variable is the first thing to go wrong."""
+    try:
+        return os.environ["SCRAPINGBEE_API_KEY"]
+    except KeyError:
+        raise RequestRejected("SCRAPINGBEE_API_KEY is not set. A free account at "
+                             "scrapingbee.com gives you one.") from None
+
+
 # The classic Explore endpoint compares up to 5 terms in one call, the cap when
 # we tested, September 2026. If a longer list stops returning HTTP 400, raise it:
 # Google's Explore help page carries the current figure.
@@ -173,7 +182,7 @@ def fetch_widget(chain, items, category=0, retries=2):
     for attempt in range(retries + 1):
         try:
             response = requests.get("https://app.scrapingbee.com/api/v1/", params={
-                "api_key": os.environ["SCRAPINGBEE_API_KEY"],
+                "api_key": api_key(),
                 # Any Trends page can host the scenario. The geo that selects the
                 # data is the one inside comparisonItem, not this URL.
                 "url": "https://trends.google.com/trending?geo=US",
@@ -258,6 +267,7 @@ def fetch_widget(chain, items, category=0, retries=2):
 
 def interest_over_time(keywords, geo="US", timeframe="today 12-m",
                        retries=2, category=0):
+    """One 0-100 series per keyword, on a scale shared across the request."""
     if isinstance(keywords, str):
         keywords = [keywords]
     if not 1 <= len(keywords) <= MAX_COMPARISON_ITEMS:
@@ -316,9 +326,10 @@ def as_datetime(raw):
 
 
 def trending_now(geo="US"):
+    """Terms spiking now, from the RSS feed. One call, and no browser."""
     try:
         response = requests.get("https://app.scrapingbee.com/api/v1/", params={
-            "api_key": os.environ["SCRAPINGBEE_API_KEY"],
+            "api_key": api_key(),
             "url": f"https://trends.google.com/trending/rss?geo={geo}",
             "custom_google": "true",
             "render_js": "false",
