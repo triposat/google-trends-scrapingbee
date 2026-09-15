@@ -87,7 +87,7 @@ fetch('/trends/api/explore?hl=en-US&tz=0&req=' + encodeURIComponent(req),
 
 
 def parse_timeline(raw, keyword_count):
-    """Turn Google's payload into rows, or say exactly what stopped us."""
+    """Turn Google's payload into rows, or say exactly what stopped the parse."""
     try:
         timeline = json.loads(raw[raw.index("{"):])["default"]["timelineData"]
     except (ValueError, KeyError, TypeError) as exc:
@@ -140,7 +140,7 @@ def parse_timeline(raw, keyword_count):
 
 
 def check_identity(request, keywords):
-    """Confirm the widget Google answered describes the query we asked for.
+    """Confirm the widget Google answered describes the query you asked for.
 
     Nothing in the data payload names a keyword, so a crossed or stale response
     parses cleanly and passes every check above. The widget request does name
